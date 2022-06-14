@@ -3,6 +3,7 @@ import 'package:jobtimer/app/core/database/database.dart';
 import 'package:jobtimer/app/core/database/database_impl.dart';
 import 'package:jobtimer/app/modules/home/home_module.dart';
 import 'package:jobtimer/app/modules/login/login_module.dart';
+import 'package:jobtimer/app/modules/project/project_module.dart';
 import 'package:jobtimer/app/modules/splash/splash_page.dart';
 import 'package:jobtimer/app/service/auth/auth_service.dart';
 import 'package:jobtimer/app/service/auth/auth_service_impl.dart';
@@ -29,6 +30,10 @@ class AppModule extends Module {
         ModuleRoute(
           '/login',
           module: LoginModule(),
+        ),
+        ModuleRoute(
+          '/project',
+          module: ProjectModule(),
         ),
       ];
 }

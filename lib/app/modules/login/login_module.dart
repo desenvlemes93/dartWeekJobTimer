@@ -12,9 +12,8 @@ class LoginModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
-          '/login',
+          '/',
           child: (context, args) => LoginPage(controller: Modular.get()),
         ),
-        
       ];
 }

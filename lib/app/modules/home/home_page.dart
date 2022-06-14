@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobtimer/app/modules/home/widgets/drawer_home_page.dart';
 import 'package:jobtimer/app/modules/home/widgets/header_projects_menu.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,13 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(
-        child: SafeArea(
-          child: ListTile(
-            title: Text('Sair'),
-          ),
-        ),
-      ),
+      drawer: const DrawerHomePage(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
