@@ -4,5 +4,5 @@
         "**/.metadata": true,
         "**/.packages": true
     },
-    "generate.template.type": "Clean Code"
+    "generate.template.type": "Clean Code choice suffix"
 }

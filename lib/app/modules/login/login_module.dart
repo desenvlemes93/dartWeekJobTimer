@@ -15,6 +15,6 @@ class LoginModule extends Module {
           '/login',
           child: (context, args) => LoginPage(controller: Modular.get()),
         ),
-        ModuleRoute('/home', module: HomeModule())
+        
       ];
 }
