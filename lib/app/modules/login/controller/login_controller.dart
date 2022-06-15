@@ -17,11 +17,10 @@ class LoginController extends Cubit<LoginState> {
         );
 
   Future<void> signIn() async {
-    try {      
+    try {
       emit(state.copyWith(status: LoginStatus.loading));
       await _authService.signIn();
-      Modular.to.navigate('/home');
-
+      Modular.to.navigate('/home/');
     } catch (e, s) {
       log('Erro ao realizar Login', error: e, stackTrace: s);
       emit(
@@ -30,6 +29,5 @@ class LoginController extends Cubit<LoginState> {
             errorMessage: 'Erro ao Realizar Login'),
       );
     }
-   
   }
 }
