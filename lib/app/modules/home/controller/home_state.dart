@@ -2,7 +2,7 @@ part of 'home_controller.dart';
 
 enum HomeStatus {
   initial,
-  loadgin,
+  loading,
   complete,
   failure;
 }
@@ -12,7 +12,7 @@ class HomeState extends Equatable {
   final HomeStatus status;
   final ProjectStatus projectFilter;
 
-  HomeState._({
+  const HomeState._({
     required this.projects,
     required this.status,
     required this.projectFilter,
@@ -27,4 +27,16 @@ class HomeState extends Equatable {
 
   @override
   List<Object?> get props => [projects, status, projectFilter];
+
+  HomeState copyWith({
+    List<ProjectModel>? projects,
+    HomeStatus? status,
+    ProjectStatus? projectFilter,
+  }) {
+    return HomeState._(
+      projects: projects ?? this.projects,
+      status: status ?? this.status,
+      projectFilter: projectFilter ?? this.projectFilter,
+    );
+  }
 }
