@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:jobtimer/app/service/auth/auth_service.dart';
-import 'package:jobtimer/app/service/auth/auth_service_impl.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -15,14 +13,15 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        Modular.to.navigate('/login');
-      } else {
-        Modular.to.navigate('/home');
-      }
-    });
+    FirebaseAuth.instance.authStateChanges().listen(
+      (User? user) {
+        if (user == null) {
+          Modular.to.navigate('/login');
+        } else {
+          Modular.to.navigate('/home');
+        }
+      },
+    );
   }
 
   @override

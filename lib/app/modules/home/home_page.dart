@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobtimer/app/modules/home/controller/home_controller.dart';
 import 'package:jobtimer/app/modules/home/widgets/drawer_home_page.dart';
 import 'package:jobtimer/app/modules/home/widgets/header_projects_menu.dart';
+import 'package:jobtimer/app/modules/home/widgets/project_tile.dart';
 import 'package:jobtimer/app/view_models/project_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -52,6 +53,12 @@ class HomePage extends StatelessWidget {
                   );
                 },
               ),
+              SliverPersistentHeader(
+                delegate: HeaderProjectsMenu(
+                  controller: controller,
+                ),
+                pinned: true,
+              ),
               BlocSelector<HomeController, HomeState, List<ProjectModel>>(
                 bloc: controller,
                 selector: (state) => state.projects,
@@ -59,17 +66,10 @@ class HomePage extends StatelessWidget {
                   return SliverList(
                       delegate: SliverChildListDelegate(
                     projects
-                        .map((project) => ListTile(
-                              title: Text(project.name),
-                              subtitle: Text('${project.estimate}'),
-                            ))
+                        .map((project) => ProjectTile(projectModel: project))
                         .toList(),
                   ));
                 },
-              ),
-              SliverPersistentHeader(
-                delegate: HeaderProjectsMenu(),
-                pinned: true,
               ),
             ],
           ),

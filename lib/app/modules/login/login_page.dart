@@ -3,15 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobtimer/app/modules/login/controller/login_controller.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final LoginController controller;
-  const LoginPage({Key? key, required this.controller}) : super(key: key);
+  const LoginPage({
+    super.key,
+    required this.controller,
+  });
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
     return BlocListener<LoginController, LoginState>(
-      bloc: controller,
+      bloc: widget.controller,
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status == LoginStatus.failure) {
@@ -44,12 +53,12 @@ class LoginPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.grey[200],
                     ),
-                    onPressed: () => controller.signIn(),
+                    onPressed: () => widget.controller.signIn(),
                     child: Image.asset('assets/images/google.png'),
                   ),
                 ),
                 BlocSelector<LoginController, LoginState, bool>(
-                  bloc: controller,
+                  bloc: widget.controller,
                   selector: (state) {
                     return state.status == LoginStatus.loading;
                   },

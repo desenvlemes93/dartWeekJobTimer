@@ -8,8 +8,7 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp.router(      
       title: 'Job Timer',
       builder: asuka.builder,
       theme: AppConfigUI.theme,

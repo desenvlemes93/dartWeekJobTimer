@@ -4,19 +4,21 @@ import 'package:isar/isar.dart';
 import 'package:jobtimer/app/core/database/database.dart';
 import 'package:jobtimer/app/entities/project.dart';
 import 'package:jobtimer/app/entities/project_status.dart';
+import 'package:jobtimer/app/entities/project_task.dart';
 
 import '../../core/exceptions/failure.dart';
 import './projects_repository.dart';
 
 class ProjectsRepositoryImpl implements ProjectsRepository {
   final Database _database;
-  ProjectsRepositoryImpl({
+  const ProjectsRepositoryImpl({
     required Database database,
   }) : _database = database;
 
   @override
   Future<void> register(Project project) async {
     try {
+      print(project);
       final connection = await _database.openConnection();
       await connection.writeTxn((isar) {
         return isar.projects.put(project);
@@ -38,4 +40,10 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
         await connection.projects.filter().statusEqualTo(status).findAll();
     return project;
   }
+
+  @override
+  Future<Project> addTask(int projectId, ProjectTask task) async {}
+
+  @override
+  Future<Project> findById(int projectId) async {}
 }

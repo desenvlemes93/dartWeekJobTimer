@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "591827485006",
-    "project_id": "jd-job-timer",
-    "storage_bucket": "jd-job-timer.appspot.com"
+    "project_number": "412201532463",
+    "project_id": "job-tim",
+    "storage_bucket": "job-tim.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:591827485006:android:1e3f3fe1a949a421479e1f",
+        "mobilesdk_app_id": "1:412201532463:android:8940d619dd6182e0305ada",
         "android_client_info": {
           "package_name": "br.com.ricardo.jobtimer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "591827485006-p3vmle4husdi5j1llfmrtgqt2qnndco1.apps.googleusercontent.com",
+          "client_id": "412201532463-52favpsc5h3tsi9m6h08cvh4dkovtlvf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpobxj3r57wK_uhVv1mPbyXnVXJFQBDq8"
+          "current_key": "AIzaSyC97X-CrAZvEkTFw5UaEI1CfV0QFrfXaQw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "591827485006-p3vmle4husdi5j1llfmrtgqt2qnndco1.apps.googleusercontent.com",
+              "client_id": "412201532463-52favpsc5h3tsi9m6h08cvh4dkovtlvf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

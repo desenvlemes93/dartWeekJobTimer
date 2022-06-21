@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -52,11 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyApInagGuJCuIVz22Xfz3eo2gzqbpRd-mg',
+    appId: '1:412201532463:web:db95b880c44dd8c7305ada',
+    messagingSenderId: '412201532463',
+    projectId: 'job-tim',
+    authDomain: 'job-tim.firebaseapp.com',
+    storageBucket: 'job-tim.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDpobxj3r57wK_uhVv1mPbyXnVXJFQBDq8',
-    appId: '1:591827485006:android:1e3f3fe1a949a421479e1f',
-    messagingSenderId: '591827485006',
-    projectId: 'jd-job-timer',
-    storageBucket: 'jd-job-timer.appspot.com',
+    apiKey: 'AIzaSyC97X-CrAZvEkTFw5UaEI1CfV0QFrfXaQw',
+    appId: '1:412201532463:android:8940d619dd6182e0305ada',
+    messagingSenderId: '412201532463',
+    projectId: 'job-tim',
+    storageBucket: 'job-tim.appspot.com',
   );
 }

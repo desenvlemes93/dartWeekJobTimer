@@ -1,6 +1,9 @@
 import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobtimer/app/core/ui/button_with_loader.dart';
+import 'package:jobtimer/app/entities/project_status.dart';
+import 'package:jobtimer/app/modules/home/controller/home_controller.dart';
 import 'package:jobtimer/app/modules/project/register/controller/project_register_controller.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -83,23 +86,14 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
                       Validatorless.number('Permitido somente numeros'),
                     ]),
                   ),
-                  BlocSelector<ProjectRegisterController, ProjectRegisterStatus,
-                      bool>(
-                    bloc: widget.controller,
-                    selector: (state) => state == ProjectRegisterStatus.loading,
-                    builder: (context, showLoading) {
-                      return Visibility(
-                        visible: showLoading,
-                        child: const Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        ),
-                      );
-                    },
-                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 49,
-                    child: ElevatedButton(
+                    child: ButtonWithLoader<ProjectRegisterController,
+                        ProjectRegisterStatus>(
+                      bloc: widget.controller,
+                      selector: (state) =>
+                          state == ProjectRegisterStatus.loading,
                       onPressed: () async {
                         final formValid =
                             _formkey.currentState?.validate() ?? false;
@@ -109,7 +103,7 @@ class _ProjectRegisterPageState extends State<ProjectRegisterPage> {
                           await widget.controller.register(name, estimate);
                         }
                       },
-                      child: const Text('Salvar'),
+                      label: 'Salvar',
                     ),
                   ),
                 ],

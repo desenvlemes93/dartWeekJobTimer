@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:jobtimer/app/entities/converters/project_status_converter.dart';
 import 'package:jobtimer/app/entities/project_status.dart';
 import 'package:jobtimer/app/service/projects/project_service.dart';
 import 'package:jobtimer/app/view_models/project_model.dart';
@@ -22,5 +23,15 @@ class HomeController extends Cubit<HomeState> {
       log('Erro ao buscar os projetos', error: e, stackTrace: s);
       emit(state.copyWith(status: HomeStatus.failure));
     }
+  }
+
+  Future<void> filter(ProjectStatus status) async {
+    emit(state.copyWith(status: HomeStatus.loading, projects: []));
+    final projects = await _projectService.findByStatus(status);
+    emit(state.copyWith(
+      status: HomeStatus.complete,
+      projects: projects,
+      projectFilter: status,
+    ));
   }
 }
