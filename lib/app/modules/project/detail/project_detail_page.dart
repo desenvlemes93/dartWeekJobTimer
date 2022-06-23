@@ -1,7 +1,8 @@
-import 'package:asuka/asuka.dart';
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobtimer/app/core/ui/job_timer_icons.dart';
+import 'package:jobtimer/app/entities/project_status.dart';
 import 'package:jobtimer/app/modules/project/detail/controller/project_detail_state.dart';
 import 'package:jobtimer/app/modules/project/detail/widgets/project_detail_appbar.dart';
 import 'package:jobtimer/app/modules/project/detail/widgets/project_pie_chart.dart';
@@ -10,7 +11,7 @@ import 'package:jobtimer/app/view_models/project_model.dart';
 
 class ProjectDetailPage extends StatelessWidget {
   final ProjectDetailController controller;
-  const ProjectDetailPage({
+  ProjectDetailPage({
     super.key,
     required this.controller,
   });
@@ -22,7 +23,7 @@ class ProjectDetailPage extends StatelessWidget {
         bloc: controller,
         listener: (context, state) {
           if (state.status == ProjectDetailStatus.failure) {
-            AsukaSnackbar.alert('Erro Interno');
+            asuka.AsukaSnackbar.alert('Erro Interno');
           }
         },
         builder: (context, state) {
@@ -51,44 +52,57 @@ class ProjectDetailPage extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _buildProjectDetail(BuildContext context, ProjectModel projectModel) {
-  return CustomScrollView(
-    slivers: [
-      ProjectDetailAppbar(projectModel: projectModel),
-      SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 50.0,
-                bottom: 50,
+  Widget _buildProjectDetail(BuildContext context, ProjectModel projectModel) {
+    final totalTask = projectModel.taks.fold<int>(0, ((totalValue, task) {
+      return totalValue += task.duration;
+    }));
+    return CustomScrollView(
+      slivers: [
+        ProjectDetailAppbar(projectModel: projectModel),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 50.0,
+                  bottom: 50,
+                ),
+                child: ProjectPieChart(
+                  projectEstimate: projectModel.estimate,
+                  totalTask: totalTask,
+                ),
               ),
-              child: ProjectPieChart(),
-            ),
-            ProjectTaskTile(),
-            ProjectTaskTile(),
-            ProjectTaskTile(),
-            ProjectTaskTile(),
-            ProjectTaskTile(),
-          ],
+              ...projectModel.taks
+                  .map(
+                    (task) => ProjectTaskTile(
+                      task: task,
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
         ),
-      ),
-      SliverFillRemaining(
-        hasScrollBody: false,
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: ElevatedButton.icon(
-              onPressed: () {},
-              icon: Icon(JobTimericons.ok_circled2),
-              label: Text('Finalizar Projeto'),
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Visibility(
+                visible: projectModel.status != ProjectStatus.finalizado,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    controller.finishProject();
+                  },
+                  icon: Icon(JobTimericons.ok_circled2),
+                  label: Text('Finalizar Projeto'),
+                ),
+              ),
             ),
           ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
