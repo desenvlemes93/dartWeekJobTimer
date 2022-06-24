@@ -5,4 +5,5 @@ enum TaskStatus {
   loading,
   complete,
   failure,
+  success;
 }

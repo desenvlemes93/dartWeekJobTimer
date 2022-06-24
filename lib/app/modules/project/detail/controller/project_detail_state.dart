@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:jobtimer/app/service/projects/project_service.dart';
 import 'package:jobtimer/app/view_models/project_model.dart';
 
 part 'project_detail_controller.dart';
